@@ -1,0 +1,113 @@
+@use 'sass:math';
+//Подключение шрифта
+@mixin font($font_name, $file_name, $weight, $style) {
+  @font-face {
+    font-family: $font_name;
+    font-display: swap;
+    src: url('../fonts/#{$file_name}.woff2') format('woff2'),
+      url('../fonts/#{$file_name}.woff') format('woff');
+    font-weight: #{$weight};
+    font-style: #{$style};
+  }
+}
+//Percent
+@function percent($px, $from) {
+  $result: math.div($px, $from) * 100%;
+  @return $result;
+}
+//REM
+@function rem($px) {
+  $result: math.div($px, 16) + rem;
+  @return $result;
+}
+//EM
+@function em($px, $current: 16) {
+  $result: math.div($px, $current) + em;
+  @return $result;
+}
+
+//Currency
+@mixin currency($sym) {
+  &::after {
+    content: '#{$sym}';
+  }
+}
+
+// Remove unnecessary bottom margin from last element in a given container
+@mixin noMarginBottom {
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Centered Cover Background
+@mixin bgImageCentered($bg) {
+  background: $bg;
+  background-position: center center;
+  background-size: cover;
+}
+
+// Gradient Text
+@mixin gradientText($bg) {
+  background: $bg;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Gradient Border
+@mixin gradientBorder($bg, $border, $radius) {
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: $radius;
+    padding: $border;
+    background: $bg;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+}
+
+// Media Queries
+@mixin maxTablet {
+  @media screen and (max-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin minTablet {
+  @media screen and (min-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin maxMobile {
+  @media screen and (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin minMobile {
+  @media screen and (min-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin maxMobileSmall {
+  @media screen and (max-width: $mobileSmall) {
+    @content;
+  }
+}
+
+@mixin minMobileSmall {
+  @media screen and (min-width: $mobileSmall) {
+    @content;
+  }
+}
