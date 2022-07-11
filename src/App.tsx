@@ -1,15 +1,12 @@
-import React from 'react';
-import Chessboard from './components/chessboard/chessboard';
+import Main from './components/main/main';
+import { ChessPiecesProvider } from './components/providers/ChessPiecesProvider';
 
 function App() {
   return (
-    <div className='chess-app'>
-      <div className='wrapper'>
-        <main className='page'>
-          <Chessboard />
-        </main>
-      </div>
-    </div>
+    <ChessPiecesProvider>
+      {' '}
+      <Main />
+    </ChessPiecesProvider>
   );
 }
 

@@ -1,21 +1,26 @@
 import { FC } from 'react';
+import PieceMaker from '../piece-maker/piece-maker';
 
-interface CellType {
-  type: number;
+interface CellProps {
+  coords: Object;
+  color: string | null;
+  key: string;
 }
 
-const Cell: FC<CellType> = ({ type }: CellType) => {
-  let cellElement: JSX.Element = <div className='chessboard__cell'></div>;
+const Cell: FC<CellProps> = (props: CellProps) => {
+  let cellClassName: string = '';
+  let cellElement: JSX.Element | null = null;
+  let chessPieceElement: JSX.Element | null = (
+    <PieceMaker cellCoords={props.coords} />
+  );
 
-  if (type === 0) {
-    cellElement = (
-      <div className='chessboard__cell chessboard__cell--white'></div>
-    );
-  } else if (type === 1) {
-    cellElement = (
-      <div className='chessboard__cell chessboard__cell--black'></div>
-    );
+  if (props.color === 'white') {
+    cellClassName = `chessboard__cell chessboard__cell--white ${props.coords}`;
+  } else if (props.color === 'black') {
+    cellClassName = `chessboard__cell chessboard__cell--black ${props.coords}`;
   }
+
+  cellElement = <div className={cellClassName}>{chessPieceElement}</div>;
 
   return cellElement;
 };

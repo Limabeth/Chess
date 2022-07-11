@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import AxisX from '../x-axis/x-axis';
+import AxisX from '../axis-x/axis-x';
 import AxisY from '../axis-y/axis-y';
 import Board from '../board/board';
 import FillerCell from '../filler-cell/filler-cell';
