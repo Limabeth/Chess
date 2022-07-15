@@ -1,5 +1,14 @@
 --- Cell Component: 
     - Change cell highlight color
+    - Replace event listeners with hover since piece styling occupies the whole cell
+    - Fix useEffect 
+    - Fix move notation to work without sloppy mode
 
 --- Game: 
     - Separate Provider for Whose Turn?
+
+--- Chess Context
+    - Fix type for board and setBoard
+
+--- Board Component
+    - Re-do props?

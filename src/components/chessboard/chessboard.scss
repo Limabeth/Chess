@@ -1,10 +1,26 @@
 @import '../../scss/base/mixins';
 
+%bg-cell-legal {
+  background: #1d976c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #93f9b9,
+    #1d976c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #93f9b9,
+    #1d976c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: 3px 3px 7px rgba(29, 151, 108, 0.75);
+}
+
 $bg-cell-white: rgb(222, 184, 135);
 $bg-cell-black: rgb(155, 53, 39);
+
 $cell-border-width: 1px;
 $cell-border-color: rgb(41, 41, 41);
-$cell-highlight-color: rgb(187, 187, 187);
+$cell-highlight-color: rgba(240, 172, 69, 1);
 
 $cell-size-base: 80px;
 $side-cell-size-base: 40px;
@@ -13,6 +29,11 @@ $side-cell-font-family: 'Caveat', cursive;
 $side-cell-text-color: rgb(27, 27, 27);
 
 $piece-height-base: 45px;
+
+%cell-hover {
+  background-color: $cell-highlight-color;
+  box-shadow: 0 0 20px rgb(165, 114, 38) inset;
+}
 
 .chessboard {
   &__container {
@@ -112,6 +133,28 @@ $piece-height-base: 45px;
     &--black {
       background-color: $bg-cell-black;
     }
+
+    &--legal {
+      position: relative;
+
+      &:before {
+        @extend %bg-cell-legal;
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        transition: transform 0.2s ease-out;
+      }
+
+      &:hover {
+       @extend %cell-hover;
+      }
+    }
   }
 
   &__filler-cell {
@@ -129,8 +172,12 @@ $piece-height-base: 45px;
     justify-content: center;
     align-items: center;
 
-    &--highlighted {
-      background-color: $cell-highlight-color;
+    &--hoverable:hover {
+      @extend %cell-hover;
+    }
+
+    &--selected {
+      @extend %cell-hover;
     }
 
     img {

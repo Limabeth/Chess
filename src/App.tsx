@@ -1,12 +1,12 @@
 import Main from './components/main/main';
-import { ChessPiecesProvider } from './components/providers/ChessPiecesProvider';
+import { ChessProvider } from './components/providers/ChessProvider';
 
 function App() {
   return (
-    <ChessPiecesProvider>
+    <ChessProvider>
       {' '}
       <Main />
-    </ChessPiecesProvider>
+    </ChessProvider>
   );
 }
 

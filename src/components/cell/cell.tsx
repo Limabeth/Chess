@@ -1,26 +1,69 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import PieceMaker from '../piece-maker/piece-maker';
+import { useChessContext } from '../providers/ChessProvider';
+import { chess } from '../../libs/chess/chess';
+import { Square } from 'chess.js';
+import { generateCellClassName } from '../../services/chess/generateCellClassName';
+import { isCellLegal } from '../../services/chess/isCellLegal';
 
 interface CellProps {
-  coords: Object;
-  color: string | null;
+  coords: Square;
+  color: string;
   key: string;
 }
 
 const Cell: FC<CellProps> = (props: CellProps) => {
-  let cellClassName: string = '';
+  const { coords, color } = props;
+  const [legal, setLegal] = useState(false);
+  const [className, setClassName] = useState('');
+  const { whoseTurn, setWhoseTurn, legalMoves, setLegalMoves, selectedPiece, setSelectedPiece, setBoard } = useChessContext();
+
+  useEffect(() => {
+    setLegal(false);
+
+    if (isCellLegal(coords, legalMoves)) {
+      setLegal(true);
+    }
+
+    setClassName(generateCellClassName(color, legal));
+  });
+
+  const onClickHandler = () => {
+    if (!legal) return;
+
+    const newMove: Object | null = chess.move(
+      `${selectedPiece.position}${coords}`,
+      { sloppy: true }
+    );
+
+    if (newMove) {
+      const isPiecePlaced = chess.put(
+        { type: selectedPiece.type, color: whoseTurn },
+        coords
+      );
+
+      if (isPiecePlaced) {
+        const newBoard = chess.board();
+        const newTurn = chess.turn();
+
+        setBoard(newBoard)
+        setLegalMoves([]);
+        setSelectedPiece('');
+        setWhoseTurn(newTurn);
+      }
+    }
+  };
+
   let cellElement: JSX.Element | null = null;
   let chessPieceElement: JSX.Element | null = (
-    <PieceMaker cellCoords={props.coords} />
+    <PieceMaker cellCoords={coords} />
   );
 
-  if (props.color === 'white') {
-    cellClassName = `chessboard__cell chessboard__cell--white ${props.coords}`;
-  } else if (props.color === 'black') {
-    cellClassName = `chessboard__cell chessboard__cell--black ${props.coords}`;
-  }
-
-  cellElement = <div className={cellClassName}>{chessPieceElement}</div>;
+  cellElement = (
+    <div onClick={onClickHandler} className={className}>
+      {chessPieceElement}
+    </div>
+  );
 
   return cellElement;
 };

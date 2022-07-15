@@ -1,34 +1,26 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import Cell from '../cell/cell';
-import { configAxisX } from '../../config/axisConfig';
-import { configAxisY } from '../../config/axisConfig';
-
-const getCellColor = (x: number, y: number) => {
-  let color: string | null = null;
-
-  if (x % 2 === 0 && y % 2 === 0) {
-    color = 'white';
-  } else if (x % 2 !== 0 && y % 2 === 0) {
-    color = 'black';
-  } else if (x % 2 === 0 && y % 2 !== 0) {
-    color = "black"
-  } else if (x % 2 !== 0 && y % 2 !== 0) {
-    color = "white";
-  }
-
-  return color;
-};
+import { useChessContext } from '../providers/ChessProvider';
+import { getCellColor } from '../../services/chess/getCellColor';
+import { BOARD_CONFIG } from '../../config/BOARD_CONFIG';
+import { BOARD_REVERSED_CONFIG } from '../../config/BOARD_CONFIG_REVERSED';
+import { Square } from 'chess.js';
+import { generateBoardClassName } from '../../services/chess/generateBoardClassName';
 
 const Board: FC = () => {
+  const { board, whoseTurn } = useChessContext();
+
+  useEffect(() => {}, [board])
+
+  const layout = whoseTurn === "w" ? BOARD_CONFIG : BOARD_REVERSED_CONFIG;
+
   return (
-    <div className='chessboard__board'>
-      {configAxisY.map((num, numIndex) => {
-        return configAxisX.map((letter, letterIndex) => {
-          const key: string = `${letter}${num}`;
-
-          const coords: string = key;
-          const color = getCellColor(letterIndex, numIndex);
-
+    <div className={generateBoardClassName(whoseTurn)}>
+      {layout.map((row, rowIndex) => {
+        return row.map((col, colIndex) => {
+          const key: Square = col;
+          const coords = key;
+          const color = getCellColor(rowIndex, colIndex);
           return <Cell coords={coords} color={color} key={key} />;
         });
       })}

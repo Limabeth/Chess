@@ -1,67 +1,46 @@
-// import { FC } from 'react';
-import { useChessPiecesContext } from '../providers/ChessPiecesProvider';
-import Pawn from '../pawn/pawn';
-import Bishop from '../bishop/bishop';
-import Knight from '../knight/knight';
-import Rook from '../rook/rook';
-import Queen from '../queen/queen';
-import King from '../king/king';
+import { FC } from 'react';
+import { useChessContext } from '../providers/ChessProvider';
+import Piece from "../Piece/Piece";
 
-const PieceMaker = (props: any) => {
-  const { chessPieces } = useChessPiecesContext();
+interface PieceMakerProps {
+  cellCoords: string;
+}
 
-  let chessPiece: string = '';
-  let chessPieceElement: JSX.Element | null = null;
+const PieceMaker: FC<PieceMakerProps> = (props: PieceMakerProps) => {
+  const { board } = useChessContext();
 
-  Object.entries(chessPieces).forEach(([coords, piece]) => {
-    const pieceCoords: string = coords;
-    if (props.cellCoords === pieceCoords) {
-      chessPiece = piece;
-    }
-  });
+  const { cellCoords } = props;
 
-  switch (chessPiece) {
-    case 'white_pawn':
-      chessPieceElement = <Pawn color='white' />;
-      break;
-    case 'black_pawn':
-      chessPieceElement = <Pawn color='black' />;
-      break;
-    case 'white_knight':
-      chessPieceElement = <Bishop color='white' />;
-      break;
-    case 'black_knight':
-      chessPieceElement = <Bishop color='black' />;
-      break;
-    case 'white_bishop':
-      chessPieceElement = <Knight color='white' />;
-      break;
-    case 'black_bishop':
-      chessPieceElement = <Knight color='black' />;
-      break;
-    case 'white_rook':
-      chessPieceElement = <Rook color='white' />;
-      break;
-    case 'black_rook':
-      chessPieceElement = <Rook color='black' />;
-      break;
-    case 'white_queen':
-      chessPieceElement = <Queen color='white' />;
-      break;
-    case 'black_queen':
-      chessPieceElement = <Queen color='black' />;
-      break;
-    case 'white_king':
-      chessPieceElement = <King color='white' />;
-      break;
-    case 'black_king':
-      chessPieceElement = <King color='black' />;
-      break;
-    default:
-      break;
+  const piece = {
+    type: '',
+    color: '',
+    position: '',
   }
 
-  return chessPieceElement;
+  let pieceElement: JSX.Element | null = null;
+
+  board.forEach((row: any) => {
+    row.forEach((col: any) => {
+      if (!col) return;
+
+      const pieceCoords = col.square;
+
+      if (pieceCoords === cellCoords) {
+        piece.type = col.type;
+        piece.color = col.color;
+        piece.position = pieceCoords;
+
+        return;
+      }
+    });
+  });
+
+  if (piece.type !== '') {
+    pieceElement = <Piece piece={piece} />;
+
+  }
+
+  return pieceElement;
 };
 
 export default PieceMaker;
