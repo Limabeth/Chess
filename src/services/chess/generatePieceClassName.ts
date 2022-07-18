@@ -3,14 +3,14 @@ const generatePieceClassName = (
   pieceColor: string,
   selected: boolean
 ) => {
-  let className: string = 'chessboard__piece';
+  let className: string = 'chess-piece';
 
   if (whoseTurn === pieceColor) {
-    className += ' chessboard__piece--hoverable';
+    className += ' chess-piece--hoverable';
   }
 
   if (selected) {
-    className += ' chessboard__piece--selected';
+    className += ' chess-piece--selected';
   }
 
   return className;

@@ -6,6 +6,7 @@
 
 --- Game: 
     - Separate Provider for Whose Turn?
+    - Type for cell color
 
 --- Chess Context
     - Fix type for board and setBoard

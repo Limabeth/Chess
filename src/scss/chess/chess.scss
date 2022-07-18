@@ -1,0 +1,53 @@
+$cell-size-base: 80px;
+$side-cell-size-base: 40px;
+
+$bg-cell-white: rgb(222, 184, 135);
+$bg-cell-black: rgb(155, 53, 39);
+
+$cell-border-width: 1px;
+$cell-border-color: rgb(41, 41, 41);
+
+$side-cell-font-family: 'Caveat', cursive;
+$side-cell-text-color: rgb(27, 27, 27);
+
+$piece-height-base: 45px;
+
+%bg-cell-selected {
+  background-color: rgba(240, 172, 69, 1);
+  box-shadow: 0 0 20px rgb(165, 114, 38) inset;
+}
+
+%bg-cell-legal {
+  background: #1d976c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #93f9b9,
+    #1d976c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #93f9b9,
+    #1d976c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: 3px 3px 7px rgba(29, 151, 108, 0.75);
+}
+
+%bg-cell-en-passant {
+  background: #ed213a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #93291e,
+    #ed213a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #93291e,
+    #ed213a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: 3px 3px 7px #93291e;
+}
+
+%bg-cell-capture {
+  background-color: hsl(350, 70%, 45%);
+  box-shadow: 0 0 20px hsl(350, 60%, 30%) inset;
+}

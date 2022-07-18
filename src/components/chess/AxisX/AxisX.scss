@@ -1,0 +1,30 @@
+.chess-axis-x {
+  grid-row: 2/3;
+  grid-column: 2/3;
+
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: auto;
+
+  // border-left: $cell-border-width solid $cell-border-color;
+  border-right: $cell-border-width solid $cell-border-color;
+
+  &__letter-cell {
+    height: $side-cell-size-base;
+    background-color: $bg-cell-white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: $side-cell-text-color;
+    font-size: rem(30);
+    font-family: $side-cell-font-family;
+  }
+
+  @for $i from 1 through 8 {
+    &__letter-cell:nth-of-type(#{$i}) {
+      grid-column: #{$i} / #{$i + 1};
+    }
+  }
+}

@@ -1,16 +1,28 @@
-const generateCellClassName = (color: string, isLegal: boolean) => {
-  let className: string = 'chessboard__cell';
+const generateCellClassName = (color: string, check: any) => {
+  let className: string = 'chess-square';
 
   if (color === 'white') {
-    className += ' chessboard__cell--white';
+    className += ' chess-square--white';
   }
 
   if (color === 'black') {
-    className += ' chessboard__cell--black';
+    className += ' chess-square--black';
   }
 
-  if (isLegal) {
-    className += ' chessboard__cell--legal';
+  if (check.legal) {
+    className += ' chess-square--legal';
+  }
+
+  if (check.flags.includes("c")) {
+    className += ' chess-square--capture'
+  }
+
+  if (check.flags.includes("e")) {
+    className += ' chess-square--en-passant'
+  }
+
+  if (check.inCheck) {
+    className += " chess-square--in-check";
   }
 
   return className;

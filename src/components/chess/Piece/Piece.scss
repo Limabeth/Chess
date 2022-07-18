@@ -1,0 +1,21 @@
+.chess-piece {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--hoverable:hover {
+    @extend %bg-cell-selected;
+  }
+
+  &--selected {
+    @extend %bg-cell-selected;
+  }
+
+  img {
+    height: $piece-height-base;
+    width: auto;
+  }
+}

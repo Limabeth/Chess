@@ -1,0 +1,17 @@
+.chess {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__content {
+    background-color: rgb(39, 39, 39);
+
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+
+    padding: 20px;
+  }
+}

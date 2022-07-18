@@ -1,0 +1,12 @@
+.chess-board {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  background-color: $cell-border-color;
+
+  display: grid;
+  grid-template-rows: repeat(8, $cell-size-base);
+  grid-template-columns: repeat(8, $cell-size-base);
+  // gap: $cell-border-width;
+
+  border: $cell-border-width solid $cell-border-color;
+}

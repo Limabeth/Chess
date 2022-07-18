@@ -1,0 +1,65 @@
+.chess-square {
+  width: $cell-size-base;
+  height: $cell-size-base;
+
+  &--white {
+    background-color: $bg-cell-white;
+  }
+
+  &--black {
+    background-color: $bg-cell-black;
+  }
+
+  &--legal {
+    position: relative;
+
+    &:before {
+      @extend %bg-cell-legal;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      transition: transform 0.2s ease-out;
+    }
+
+    &:hover {
+      @extend %bg-cell-selected;
+    }
+  }
+
+  &--capture {
+    &:before {
+      content: none;
+    }
+
+    background-color: hsl(350, 70%, 45%);
+    box-shadow: 0 0 20px hsl(350, 60%, 30%) inset;
+  }
+
+  &--en-passant {
+    position: relative;
+
+    &:before {
+      @extend %bg-cell-en-passant;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      transition: transform 0.2s ease-out;
+    }
+  }
+
+  &--in-check {
+    @extend %bg-cell-capture;
+  }
+}

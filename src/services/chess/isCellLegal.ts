@@ -1,15 +1,34 @@
-import { Square } from "chess.js";
+import { Square } from 'chess.js';
 
-const isCellLegal = (coords: Square, moves: Array<string>) => {
-  let isLegal = false;
+type SquareCheck = {
+  legal: boolean;
+  flags: Array<string>;
+};
+
+const isCellLegal = (
+  coords: Square,
+  moves: Array<Object>,
+  squareInCheck: any
+) => {
+  let check = { legal: false, flags: [], inCheck: false };
 
   moves.forEach((move: any) => {
-    if (coords === move) {
-      isLegal = true;
+    if (coords === move.to) {
+      console.log(move);
+      check.legal = true;
+      check.flags = move?.flags.split('');
     }
   });
 
-  return isLegal;
+  if (!squareInCheck) {
+    return check;
+  }
+
+  if (coords === squareInCheck.square) {
+    check.inCheck = true;
+  }
+
+  return check;
 };
 
 export { isCellLegal };

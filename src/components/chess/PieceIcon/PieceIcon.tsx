@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { piecesImages as images } from '../../config/piecesImagesConfig';
+import { piecesImages as images } from '../../../config/piecesImagesConfig';
 
 interface PieceIconProps {
   type: string;

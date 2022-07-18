@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import Chessboard from '../chessboard/chessboard';
+import Chess from '../chess/Chess/Chess';
 
 const Main: FC = () => {
   return (
     <div className='chess-app'>
       <div className='wrapper'>
         <main className='page'>
-          <Chessboard />
+          <Chess />
         </main>
       </div>
     </div>

@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { AXIS_X_CONFIG, AXIS_X_REVERSED_CONFIG } from '../../config/axisConfig';
-import { useChessContext } from '../providers/ChessProvider';
+import "./AxisX.scss";
+import { AXIS_X_CONFIG } from '../../../config/AXIS_X_CONFIG';
+import { AXIS_X_REVERSED_CONFIG } from '../../../config/AXIS_X_REVERSED_CONFIG';
+import { useChessContext } from '../../providers/ChessProvider';
 
 const AxisX: FC = () => {
   const { whoseTurn } = useChessContext();
@@ -8,10 +10,10 @@ const AxisX: FC = () => {
   const axis = whoseTurn === 'w' ? AXIS_X_CONFIG : AXIS_X_REVERSED_CONFIG;
 
   return (
-    <div className='chessboard__axis-x'>
+    <div className='chess-axis-x'>
       {axis.map((item) => {
         const letterCell: JSX.Element = (
-          <div className='chessboard__letter-cell' key={item}>
+          <div className='chess-axis-x__letter-cell' key={item}>
             {item}
           </div>
         );

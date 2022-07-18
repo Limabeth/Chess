@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
-import { generatePieceClassName } from '../../services/chess/generatePieceClassName';
-import { useChessContext } from '../providers/ChessProvider';
-import { pieceProps } from '../../types/chess/pieceProps';
-import { chess } from '../../libs/chess/chess';
-import { getLegalMoves } from '../../services/chess/getLegalMoves';
+import "./Piece.scss";
+import { generatePieceClassName } from '../../../services/chess/generatePieceClassName';
+import { useChessContext } from '../../providers/ChessProvider';
+import { PiecePropsType } from '../../../types/chess/PiecePropsType';
+import { chess } from '../../../libs/chess/chess';
 import PieceIcon from '../PieceIcon/PieceIcon';
 
-const Piece: FC<pieceProps> = (props: pieceProps) => {
+const Piece: FC<PiecePropsType> = (props: PiecePropsType) => {
   const { type, color, position } = props.piece;
   const { whoseTurn, setLegalMoves, selectedPiece, setSelectedPiece } = useChessContext();
 
@@ -19,10 +19,8 @@ const Piece: FC<pieceProps> = (props: pieceProps) => {
 
     if (!possibleMoves) return;
 
-    const newLegalMoves = getLegalMoves(possibleMoves);
-
-    setLegalMoves(newLegalMoves);
-    setSelectedPiece(props.piece);
+    setLegalMoves(possibleMoves);
+    setSelectedPiece(props.piece)
   };
 
   let piece: JSX.Element | null = null;

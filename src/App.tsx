@@ -1,4 +1,4 @@
-import Main from './components/main/main';
+import Main from './components/Main/Main';
 import { ChessProvider } from './components/providers/ChessProvider';
 
 function App() {

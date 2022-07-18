@@ -1,10 +1,12 @@
 import { FC, useEffect, useState } from 'react';
-import PieceMaker from '../piece-maker/piece-maker';
-import { useChessContext } from '../providers/ChessProvider';
-import { chess } from '../../libs/chess/chess';
+import './Cell.scss';
+import PieceMaker from '../PieceMaker/PieceMaker';
+import { useChessContext } from '../../providers/ChessProvider';
+import { chess } from '../../../libs/chess/chess';
 import { Square } from 'chess.js';
-import { generateCellClassName } from '../../services/chess/generateCellClassName';
-import { isCellLegal } from '../../services/chess/isCellLegal';
+import { generateCellClassName } from '../../../services/chess/generateCellClassName';
+import { isCellLegal } from '../../../services/chess/isCellLegal';
+import { showKingInCheck } from '../../../services/chess/showKingInCheck';
 
 interface CellProps {
   coords: Square;
@@ -15,17 +17,27 @@ interface CellProps {
 const Cell: FC<CellProps> = (props: CellProps) => {
   const { coords, color } = props;
   const [legal, setLegal] = useState(false);
-  const [className, setClassName] = useState('');
-  const { whoseTurn, setWhoseTurn, legalMoves, setLegalMoves, selectedPiece, setSelectedPiece, setBoard } = useChessContext();
+  const {
+    whoseTurn,
+    setWhoseTurn,
+    legalMoves,
+    setLegalMoves,
+    selectedPiece,
+    setSelectedPiece,
+    setBoard,
+    inCheck,
+    setInCheck,
+  } = useChessContext();
+
+  const check = isCellLegal(coords, legalMoves, inCheck);
+  const className = generateCellClassName(color, check);
 
   useEffect(() => {
     setLegal(false);
 
-    if (isCellLegal(coords, legalMoves)) {
+    if (check.legal) {
       setLegal(true);
     }
-
-    setClassName(generateCellClassName(color, legal));
   });
 
   const onClickHandler = () => {
@@ -46,10 +58,17 @@ const Cell: FC<CellProps> = (props: CellProps) => {
         const newBoard = chess.board();
         const newTurn = chess.turn();
 
-        setBoard(newBoard)
+        setBoard(newBoard);
         setLegalMoves([]);
         setSelectedPiece('');
         setWhoseTurn(newTurn);
+        setInCheck(null);
+      }
+
+      if (chess.in_check()) {
+        console.log(chess.board());
+        const square = showKingInCheck(chess.turn(), chess.board());
+        setInCheck(square);
       }
     }
   };
