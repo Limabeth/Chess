@@ -37,7 +37,7 @@ const ChessProvider = ({ children }) => {
   const [board, setBoard] = useState(chess.board());
   const [selectedPiece, setSelectedPiece] = useState('');
   const [legalMoves, setLegalMoves] = useState([]);
-  const [inCheck, setInCheck] = useState(null);
+  const [kingInCheck, setKingInCheck] = useState(null);
 
   return (
     <ChessContext.Provider
@@ -54,8 +54,8 @@ const ChessProvider = ({ children }) => {
         legalMoves,
         setLegalMoves,
 
-        inCheck,
-        setInCheck,
+        kingInCheck,
+        setKingInCheck,
       }}
     >
       {children}

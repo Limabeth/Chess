@@ -1,9 +1,11 @@
 import { FC } from 'react';
 import { piecesImages as images } from '../../../config/piecesImagesConfig';
+import { PieceType } from '../../../types/chess/PieceType';
+import { TurnType } from '../../../types/chess/TurnType';
 
 interface PieceIconProps {
-  type: string;
-  color: string;
+  type: PieceType;
+  color: TurnType;
 }
 
 const Pawn: FC<PieceIconProps> = (props: PieceIconProps) => {

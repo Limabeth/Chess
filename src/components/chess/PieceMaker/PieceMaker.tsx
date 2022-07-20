@@ -13,14 +13,16 @@ const PieceMaker: FC<PieceMakerProps> = (props: PieceMakerProps) => {
 
   const { cellCoords } = props;
 
+  // Initialzie piece props with default values to avoid conflicts with types
   const pieceProps: PiecePropsType = {
     piece: {
-      type: '',
+      type: "p",
       color: 'w',
-      position: '',
+      position: 'a1',
     }
   };
 
+  let piece: boolean = false;
   let pieceElement: JSX.Element | null = null;
 
   board.forEach((row: any) => {
@@ -30,16 +32,16 @@ const PieceMaker: FC<PieceMakerProps> = (props: PieceMakerProps) => {
       const pieceCoords = col.square;
 
       if (pieceCoords === cellCoords) {
+        piece = true;
+
         pieceProps.piece.type = col.type;
         pieceProps.piece.color = col.color;
         pieceProps.piece.position = pieceCoords;
-
-        return;
       }
     });
   });
 
-  if (pieceProps.piece.type !== '') {
+  if (piece) {
     pieceElement = <Piece piece={pieceProps.piece} />;
   }
 

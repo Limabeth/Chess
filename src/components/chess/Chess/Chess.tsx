@@ -9,7 +9,6 @@ import './Chess.scss';
 const Chess: FC = () => {
   const { board, legalMoves } = useChessContext();
 
-  useEffect(() => {}, [legalMoves]);
 
   return (
     <section className='chess'>

@@ -9,57 +9,42 @@
   &--black {
     background-color: $bg-cell-black;
   }
+}
 
-  &--legal {
-    position: relative;
+.chess-square.chess-square--legal {
+  @extend %bg-cell-pseudo;
 
-    &:before {
-      @extend %bg-cell-legal;
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      transition: transform 0.2s ease-out;
-    }
-
-    &:hover {
-      @extend %bg-cell-selected;
-    }
+  &:before {
+    @extend %bg-cell-legal;
   }
 
-  &--capture {
-    &:before {
-      content: none;
-    }
+  &:hover {
+    @extend %bg-cell-selected;
+  }
+}
 
-    background-color: hsl(350, 70%, 45%);
-    box-shadow: 0 0 20px hsl(350, 60%, 30%) inset;
+.chess-square.chess-square--en-passant {
+  &:before {
+    @extend %bg-cell-en-passant;
+  }
+}
+
+.chess-square.chess-square--capture {
+  &:before {
+    content: none;
   }
 
-  &--en-passant {
-    position: relative;
+  @extend %bg-cell-capture;
+}
 
-    &:before {
-      @extend %bg-cell-en-passant;
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+.chess-square.chess-square--in-check {
+  @extend %bg-cell-capture;
+}
 
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      transition: transform 0.2s ease-out;
-    }
-  }
+.chess-square.chess-square--castling {
+  @extend %bg-cell-pseudo;
 
-  &--in-check {
-    @extend %bg-cell-capture;
+  &:before {
+    @extend %bg-cell-en-passant;
   }
 }

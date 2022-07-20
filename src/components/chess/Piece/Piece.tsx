@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import "./Piece.scss";
 import { generatePieceClassName } from '../../../services/chess/generatePieceClassName';
 import { useChessContext } from '../../providers/ChessProvider';

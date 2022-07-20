@@ -1,10 +1,12 @@
+import { Square } from 'chess.js';
+import { PieceType } from './PieceType';
 import { TurnType } from './TurnType';
 
 type PiecePropsType = {
   piece: {
-    type: string;
+    type: PieceType;
     color: TurnType;
-    position: string;
+    position: Square;
   };
 };
 

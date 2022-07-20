@@ -48,6 +48,23 @@ $piece-height-base: 45px;
 }
 
 %bg-cell-capture {
-  background-color: hsl(350, 70%, 45%);
-  box-shadow: 0 0 20px hsl(350, 60%, 30%) inset;
+  background-color: rgb(214, 19, 52);
+  box-shadow: 0 0 20px rgb(114, 12, 29) inset;
+}
+
+%bg-cell-pseudo {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    transition: transform 0.2s ease-out;
+  }
 }

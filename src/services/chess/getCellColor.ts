@@ -1,14 +1,16 @@
+import { CellColorType } from "../../types/chess/CellColorType";
+
 const getCellColor = (x: number, y: number) => {
-  let color: string = '';
+  let color: CellColorType = 'light';
 
   if (x % 2 === 0 && y % 2 === 0) {
-    color = 'white';
+    color = 'light';
   } else if (x % 2 !== 0 && y % 2 === 0) {
-    color = 'black';
+    color = 'dark';
   } else if (x % 2 === 0 && y % 2 !== 0) {
-    color = 'black';
+    color = 'dark';
   } else if (x % 2 !== 0 && y % 2 !== 0) {
-    color = 'white';
+    color = 'light';
   }
 
   return color;
